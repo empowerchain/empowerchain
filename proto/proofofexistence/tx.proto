@@ -1,0 +1,25 @@
+syntax = "proto3";
+package empowerchain.empowerchain.proofofexistence;
+
+// this line is used by starport scaffolding # proto/tx/import
+
+option go_package = "github.com/empowerchain/empowerchain/x/proofofexistence/types";
+
+// Msg defines the Msg service.
+service Msg {
+      rpc CreateProof(MsgCreateProof) returns (MsgCreateProofResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgCreateProof {
+  // reporter is the address of the signer
+  string reporter = 1;
+
+  // hash is the SHA-256 hash as a Base64 encoded string
+  string hash = 2;
+}
+
+message MsgCreateProofResponse {
+}
+
+// this line is used by starport scaffolding # proto/tx/message

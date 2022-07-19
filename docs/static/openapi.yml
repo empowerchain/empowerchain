@@ -19749,6 +19749,96 @@ paths:
           format: int64
       tags:
         - Query
+  /empowerchain/empowerchain/proofofexistence/params:
+    get:
+      summary: Parameters queries the parameters of the module.
+      operationId: EmpowerchainEmpowerchainProofofexistenceParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                description: params holds all the parameters of this module.
+                type: object
+            description: >-
+              QueryParamsResponse is response type for the Query/Params RPC
+              method.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  '/empowerchain/empowerchain/proofofexistence/proof/{hash}':
+    get:
+      summary: Queries a Proof by hash.
+      operationId: EmpowerchainEmpowerchainProofofexistenceProof
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              proof:
+                type: object
+                properties:
+                  hash:
+                    type: string
+                    description: >-
+                      Hash is the SHA-256 hash of the data of which is being
+                      made a proof for.
+
+                      The hash needs to be sent as a Base64 encoded string.
+                  timestamp:
+                    type: string
+                    format: date-time
+                    title: >-
+                      Timestamp is the time the proof was added on-chain (block
+                      time)
+                  reporter:
+                    type: string
+                    title: Reporter is the account address that created the proof
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: hash
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /ibc/apps/interchain_accounts/controller/v1/params:
     get:
       summary: Params queries all parameters of the ICA controller submodule.
@@ -47092,6 +47182,55 @@ definitions:
     description: >-
       MsgCreateVestingAccountResponse defines the Msg/CreateVestingAccount
       response type.
+  empowerchain.empowerchain.proofofexistence.MsgCreateProofResponse:
+    type: object
+  empowerchain.empowerchain.proofofexistence.Params:
+    type: object
+    description: Params defines the parameters for the module.
+  empowerchain.empowerchain.proofofexistence.Proof:
+    type: object
+    properties:
+      hash:
+        type: string
+        description: >-
+          Hash is the SHA-256 hash of the data of which is being made a proof
+          for.
+
+          The hash needs to be sent as a Base64 encoded string.
+      timestamp:
+        type: string
+        format: date-time
+        title: Timestamp is the time the proof was added on-chain (block time)
+      reporter:
+        type: string
+        title: Reporter is the account address that created the proof
+  empowerchain.empowerchain.proofofexistence.QueryGetProofResponse:
+    type: object
+    properties:
+      proof:
+        type: object
+        properties:
+          hash:
+            type: string
+            description: >-
+              Hash is the SHA-256 hash of the data of which is being made a
+              proof for.
+
+              The hash needs to be sent as a Base64 encoded string.
+          timestamp:
+            type: string
+            format: date-time
+            title: Timestamp is the time the proof was added on-chain (block time)
+          reporter:
+            type: string
+            title: Reporter is the account address that created the proof
+  empowerchain.empowerchain.proofofexistence.QueryParamsResponse:
+    type: object
+    properties:
+      params:
+        description: params holds all the parameters of this module.
+        type: object
+    description: QueryParamsResponse is response type for the Query/Params RPC method.
   ibc.applications.interchain_accounts.controller.v1.Params:
     type: object
     properties:

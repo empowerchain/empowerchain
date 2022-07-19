@@ -1,0 +1,45 @@
+syntax = "proto3";
+package empowerchain.empowerchain.proofofexistence;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "proofofexistence/params.proto";
+import "proofofexistence/proof.proto";
+// this line is used by starport scaffolding # 1
+
+option go_package = "github.com/empowerchain/empowerchain/x/proofofexistence/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/empowerchain/empowerchain/proofofexistence/params";
+  }
+  // Queries a Proof by hash.
+	rpc Proof(QueryGetProofRequest) returns (QueryGetProofResponse) {
+		option (google.api.http).get = "/empowerchain/empowerchain/proofofexistence/proof/{hash}";
+	}
+
+// this line is used by starport scaffolding # 2
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetProofRequest {
+	  string hash = 1;
+
+}
+
+message QueryGetProofResponse {
+	Proof proof = 1 [(gogoproto.nullable) = false];
+}
+
+// this line is used by starport scaffolding # 3

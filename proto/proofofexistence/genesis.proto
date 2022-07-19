@@ -1,0 +1,16 @@
+syntax = "proto3";
+package empowerchain.empowerchain.proofofexistence;
+
+import "gogoproto/gogo.proto";
+import "proofofexistence/params.proto";
+import "proofofexistence/proof.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/empowerchain/empowerchain/x/proofofexistence/types";
+
+// GenesisState defines the proofofexistence module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  repeated Proof proofList = 2 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
+}

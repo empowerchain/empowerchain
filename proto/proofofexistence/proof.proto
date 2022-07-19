@@ -1,0 +1,23 @@
+syntax = "proto3";
+package empowerchain.empowerchain.proofofexistence;
+
+import "google/protobuf/timestamp.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/empowerchain/empowerchain/x/proofofexistence/types";
+
+message Proof {
+  // Hash is the SHA-256 hash of the data of which is being made a proof for.
+  // The hash needs to be sent as a Base64 encoded string.
+  string hash = 1;
+
+  // Timestamp is the time the proof was added on-chain (block time)
+  google.protobuf.Timestamp timestamp = 2 [
+    (gogoproto.stdtime) = true,
+    (gogoproto.nullable) = false,
+    (gogoproto.moretags) = "yaml:\"timestamp\""
+  ];
+
+  // Reporter is the account address that created the proof
+  string reporter = 3;
+}
